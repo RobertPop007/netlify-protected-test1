@@ -1,8 +1,3 @@
-/**
- * CommonJS Netlify Function: password-protected download of test1.mp4
- * Auth: robert / 1234
- * URL: /download/test1.mp4
- */
 exports.handler = async (event, context) => {
   try {
     const url = new URL(event.rawUrl);

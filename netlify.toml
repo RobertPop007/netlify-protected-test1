@@ -7,7 +7,6 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-# Route /download/:name -> function
 [[redirects]]
   from = "/assets/:name"
   to = "/.netlify/functions/assets"
