@@ -35,6 +35,6 @@ exports.handler = async (event, context) => {
       isBase64Encoded: true,
     };
   } catch (e) {
-    return { statusCode: 500, body: "Server error" };
+    return { statusCode: 500, body: e };
   }
 };

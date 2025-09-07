@@ -9,6 +9,6 @@
 
 # Route /download/:name -> function
 [[redirects]]
-  from = "/download/:name"
-  to = "/.netlify/functions/download"
+  from = "/assets/:name"
+  to = "/.netlify/functions/assets"
   status = 200
