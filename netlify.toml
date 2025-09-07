@@ -6,6 +6,9 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+[functions."assets"]
+  included_files = ["private_assets/**"]
+
 [[redirects]]
   from = "/assets/*"
   to = "/.netlify/functions/assets/:splat"
