@@ -9,8 +9,8 @@
 [functions."assets"]
   included_files = ["private_assets/**"]
 
-# Every /assets/:name request goes to the function
 [[redirects]]
-  from = "/assets/:name"
-  to = "/.netlify/functions/assets"
+  from = "/assets/*"
+  to = "/.netlify/functions/assets/:splat"
   status = 200
+  force = true
