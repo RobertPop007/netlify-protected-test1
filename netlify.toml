@@ -1,0 +1,8 @@
+[functions]
+  node_bundler = "esbuild"
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/download/:name"
+  to = "/.netlify/functions/download"
+  status = 200
