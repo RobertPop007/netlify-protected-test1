@@ -1,8 +1,7 @@
 /**
- * CommonJS Netlify Function
- * Public URL: /assets/:name  (redirected here by netlify.toml)
- * Files live in /private_assets (not publicly served). They are bundled via included_files.
- * Basic Auth per file (edit CREDENTIALS).
+ * Netlify Function (CommonJS) for /assets/:name
+ * - Basic Auth per fișier
+ * - Servește fișiere din /private_assets (incluse în bundle via included_files)
  */
 const fs = require("fs");
 const path = require("path");
@@ -10,13 +9,13 @@ const path = require("path");
 const CREDENTIALS = {
   // filename: { user, pass, mime }
   "test1.mp4": { user: "robert", pass: "1234", mime: "video/mp4" },
-  // Example for future GIFs:
+  // Adaugă aici viitoare GIF/MP4:
   // "anim1.gif": { user: "ana", pass: "1111", mime: "image/gif" },
 };
 
 function guessMime(name) {
-  const ext = (name.split(".").pop() || "").toLowerCase();
   if (CREDENTIALS[name]?.mime) return CREDENTIALS[name].mime;
+  const ext = (name.split(".").pop() || "").toLowerCase();
   if (ext === "gif") return "image/gif";
   if (ext === "mp4") return "video/mp4";
   return "application/octet-stream";
@@ -45,7 +44,7 @@ exports.handler = async (event, context) => {
       return { statusCode: 404, body: "Not found" };
     }
 
-    // Basic Auth check
+    // BASIC AUTH
     const expected = "Basic " + Buffer.from(`${entry.user}:${entry.pass}`).toString("base64");
     const auth = event.headers.authorization || "";
     if (auth !== expected) {
@@ -56,9 +55,10 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Read and serve the private asset
+    // READ FILE
     const filePath = resolveAsset(name);
     if (!filePath) return { statusCode: 500, body: "Asset not found at runtime" };
+
     const data = fs.readFileSync(filePath);
 
     return {
