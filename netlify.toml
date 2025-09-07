@@ -1,12 +1,15 @@
 [build]
-  # No build step; publish the repository root
   command = ""
-  publish = "."
+  publish = "public"
 
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+[functions."assets"]
+  included_files = ["private_assets/**"]
+
+# Route /assets/:name to function
 [[redirects]]
   from = "/assets/:name"
   to = "/.netlify/functions/assets"
