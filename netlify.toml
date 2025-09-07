@@ -1,7 +1,13 @@
-[functions]
-  node_bundler = "esbuild"
-  directory = "netlify/functions"
+[build]
+  # No build step; publish the repository root
+  command = ""
+  publish = "."
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Route /download/:name -> function
 [[redirects]]
   from = "/download/:name"
   to = "/.netlify/functions/download"
